@@ -1,20 +1,11 @@
 package com.example.demo1;
 
-import com.example.demo1.Action.Action;
-import com.example.demo1.Action.MoveAction;
-import com.example.demo1.Action.RotateAction;
-import com.example.demo1.Action.ScaleAction;
-import com.example.demo1.Figure.Figure;
-import com.example.demo1.Figure.MyCircle;
-import com.example.demo1.Figure.MyLine;
-import com.example.demo1.Figure.MyTriangle;
+import com.example.demo1.Action.*;
+import com.example.demo1.Figure.*;
 import javafx.fxml.FXML;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import javafx.scene.transform.*;
+import javafx.scene.control.*;
 
 import java.util.ArrayList;
 import java.util.Stack;
@@ -70,56 +61,51 @@ public class HelloController{
     {
         figures = new ArrayList<>();
 
-        // отрисовка двух главных окружностей
+        // основание дома
         {
-            var circle = new MyCircle(200, 200, 10);
-            figures.add(circle);
-            var circle1 = new MyCircle(200, 200, 80);
-            figures.add(circle1);
-            var circle2 = new MyCircle(200, 200, 100);
-            figures.add(circle2);
+            var basement = new MyRectangle(new Point2D(100, 100), 100, 100);
+            figures.add(basement);
+            var roof = new MyTriangle(new Point2D(100, 100), new Point2D(130, 60), new Point2D(200, 100));
+            figures.add(roof);
         }
 
-        // отрисовка линий через 2 главные окрыжности
+        // большое окно
         {
-            double d = 80 * Math.sin(Math.toRadians(45));
-            var line = new MyLine(new Point2D(200 - d, 200 - d), new Point2D(200 + d, 200 + d));
-            figures.add(line);
-            var line1 = new MyLine(new Point2D(200 + d, 200 - d), new Point2D(200 - d, 200 + d));
-            figures.add(line1);
+            var bigWindowFrame = new MyRectangle(new Point2D(110, 130), 40, 40);
+            figures.add(bigWindowFrame);
+            var bigWindowFramesUp = new MyEllipseUpperArc(new Point2D(110, 120), 40, 20);
+            figures.add(bigWindowFramesUp);
+            var bigWindowFramesGirder = new MyLine(new Point2D(130, 120), new Point2D(130, 170));
+            figures.add(bigWindowFramesGirder);
         }
 
-        // отрисовка 4-х маленьких окружностей
+        // маленькое окно
         {
-            var circle3 = new MyCircle(200, 110, 10);
-            figures.add(circle3);
-            var circle4 = new MyCircle(200, 290, 10);
-            figures.add(circle4);
-            var circle5 = new MyCircle(110, 200, 10);
-            figures.add(circle5);
-            var circle6 = new MyCircle(290, 200, 10);
-            figures.add(circle6);
+            var littleWindowFrame = new MyEllipse(new Point2D(165, 120), 20, 50);
+            figures.add(littleWindowFrame);
+            var littleWindowFramesFirstGrider = new MyLine(new Point2D(175, 120), new Point2D(175, 170));
+            figures.add(littleWindowFramesFirstGrider);
+            var littleWindowFramesSecondGrider = new MyLine(new Point2D(165, 145), new Point2D(185, 145));
+            figures.add(littleWindowFramesSecondGrider);
 
-            // отрисовка линий через маленькие окружности
-            {
-                double d = 10 * Math.sin(Math.toRadians(45));
-                figures.add(new MyLine(new Point2D(200 - d, 110 - d), new Point2D(200 + d, 110 + d)));
-                figures.add(new MyLine(new Point2D(200 - d, 110 + d), new Point2D(200 + d, 110 - d)));
-                figures.add(new MyLine(new Point2D(200 - d, 290 - d), new Point2D(200 + d, 290 + d)));
-                figures.add(new MyLine(new Point2D(200 - d, 290 + d), new Point2D(200 + d, 290 - d)));
-                figures.add(new MyLine(new Point2D(110 - d, 200 - d), new Point2D(110 + d, 200 + d)));
-                figures.add(new MyLine(new Point2D(110 - d, 200 + d), new Point2D(110 + d, 200 - d)));
-                figures.add(new MyLine(new Point2D(290 - d, 200 - d), new Point2D(290 + d, 200 + d)));
-                figures.add(new MyLine(new Point2D(290 - d, 200 + d), new Point2D(290 + d, 200 - d)));
-            }
         }
 
-        // отрисовка двух треугольников
+        // форточка
         {
-            var triangle = new MyTriangle(new Point2D(200, 200), new Point2D(100, 400), new Point2D(140, 400));
-            figures.add(triangle);
-            var triangle1 = new MyTriangle(new Point2D(200, 200), new Point2D(260, 400), new Point2D(300, 400));
-            figures.add(triangle1);
+            var flyFrame = new MyCircle(new Point2D(135, 85), 10);
+            figures.add(flyFrame);
+            var flyFrameFirstLine = new MyLine(new Point2D(125, 85), new Point2D(135, 95));
+            figures.add(flyFrameFirstLine);
+            // var flyFrameSecondLine = new MyLine(new Point2D(125, 82), new Point2D(137, 94));
+            // figures.add(flyFrameSecondLine);
+            var flyFrameThirdLine = new MyLine(new Point2D(127, 79), new Point2D(141, 93));
+            figures.add(flyFrameThirdLine);
+            var flyFrameFourthLine = new MyLine(new Point2D(129, 77), new Point2D(143, 91));
+            figures.add(flyFrameFourthLine);
+            // var flyFrameFivethLine = new MyLine(new Point2D(132, 75), new Point2D(144, 87));
+            // figures.add(flyFrameFivethLine);
+            var flyFrameSixthLine = new MyLine(new Point2D(134, 75), new Point2D(145, 85));
+            figures.add(flyFrameSixthLine);
         }
     }
 
@@ -316,9 +302,6 @@ public class HelloController{
     {
         var centerPoint = new Point2D(Double.parseDouble(centerX.getText()),
                                 Double.parseDouble(centerY.getText()));
-
-        //centerPoint = centerPoint.add(centerShift);
-
         return centerPoint;
     }
 

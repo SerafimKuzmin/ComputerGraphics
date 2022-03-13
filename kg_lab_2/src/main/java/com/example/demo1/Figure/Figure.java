@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class Figure
 {
     public static final double EPS = 1e-3;
-    private  ArrayList <Point2D> points;
+    private ArrayList <Point2D> points;
     private int nPoints;
 
     public Figure()
