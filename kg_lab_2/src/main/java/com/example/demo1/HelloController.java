@@ -138,6 +138,10 @@ public class HelloController{
         {
             showAlertWithMSG("Некорректно задан центр");
         }
+        catch (NumberFormatException e)
+        {
+            showAlertWithMSG("Некорректный ввод числа, попробуйте еще раз!");
+        }
     }
 
     private void drawCenter()
