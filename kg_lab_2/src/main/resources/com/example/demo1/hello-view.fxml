@@ -9,81 +9,91 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<SplitPane dividerPositions="0.3185929648241206" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="732.0" prefWidth="997.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.HelloController">
+<SplitPane dividerPositions="0.19474785033697417" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="732.0" prefWidth="1437.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.HelloController">
   <items>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="673.0" prefWidth="367.0">
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="729.0" prefWidth="283.0" style="-fx-background-color: gray;">
          <children>
-            <Button id="leftButton" layoutX="14.0" layoutY="227.0" mnemonicParsing="false" onAction="#moveFigures" prefHeight="39.0" prefWidth="148.0" text="Перенос">
+            <Button id="leftButton" layoutX="14.0" layoutY="214.0" mnemonicParsing="false" onAction="#moveFigures" prefHeight="47.0" prefWidth="231.0" text="Перенос">
                <font>
                   <Font size="22.0" />
                </font></Button>
-            <Button layoutX="19.0" layoutY="366.0" mnemonicParsing="false" onAction="#scaleFigures" text="Масштабирование">
+            <Button layoutX="14.0" layoutY="365.0" mnemonicParsing="false" onAction="#scaleFigures" prefHeight="47.0" prefWidth="231.0" text="Масштабирование">
                <font>
                   <Font size="22.0" />
                </font></Button>
-            <TextField fx:id="centerY" layoutX="157.0" layoutY="14.0" onAction="#changedCenter" onDragExited="#changedCenter" onDragOver="#changedCenter" onInputMethodTextChanged="#changedCenter" onMouseDragExited="#changedCenter" onMouseExited="#changedCenter" prefHeight="46.0" prefWidth="111.0" promptText="Y" text="200">
+            <TextField fx:id="centerY" layoutX="148.0" layoutY="60.0" onAction="#changedCenter" onDragExited="#changedCenter" onDragOver="#changedCenter" onInputMethodTextChanged="#changedCenter" onMouseDragExited="#changedCenter" onMouseExited="#changedCenter" prefHeight="51.0" prefWidth="98.0" promptText="Y" text="200">
                <font>
                   <Font size="24.0" />
                </font></TextField>
-            <TextField fx:id="moveX" layoutX="14.0" layoutY="172.0" prefHeight="46.0" prefWidth="98.0" promptText="X">
+            <TextField fx:id="moveX" layoutX="14.0" layoutY="159.0" prefHeight="46.0" prefWidth="98.0" promptText="X">
                <font>
                   <Font size="24.0" />
                </font></TextField>
-            <TextField fx:id="moveY" layoutX="148.0" layoutY="172.0" prefHeight="46.0" prefWidth="98.0" promptText="Y">
+            <TextField fx:id="moveY" layoutX="148.0" layoutY="159.0" prefHeight="46.0" prefWidth="98.0" promptText="Y">
                <font>
                   <Font size="24.0" />
                </font></TextField>
-            <TextField fx:id="scaleValueX" layoutX="19.0" layoutY="310.0" prefHeight="46.0" prefWidth="81.0" promptText="X">
+            <TextField fx:id="scaleValueX" layoutX="14.0" layoutY="310.0" prefHeight="51.0" prefWidth="98.0" promptText="X">
                <font>
                   <Font size="24.0" />
                </font></TextField>
-            <TextField fx:id="centerX" layoutX="14.0" layoutY="14.0" onAction="#changedCenter" onDragExited="#changedCenter" onDragOver="#changedCenter" onInputMethodTextChanged="#changedCenter" onMouseDragExited="#changedCenter" onMouseExited="#changedCenter" prefHeight="46.0" prefWidth="111.0" promptText="X" text="200">
+            <TextField fx:id="centerX" layoutX="14.0" layoutY="60.0" onAction="#changedCenter" onDragExited="#changedCenter" onDragOver="#changedCenter" onInputMethodTextChanged="#changedCenter" onMouseDragExited="#changedCenter" onMouseExited="#changedCenter" prefHeight="51.0" prefWidth="98.0" promptText="X" text="200">
                <font>
                   <Font size="24.0" />
                </font></TextField>
-            <Button layoutX="19.0" layoutY="509.0" mnemonicParsing="false" onAction="#rotateFigures" prefHeight="40.0" prefWidth="245.0" text="Поворот">
+            <Button layoutX="14.0" layoutY="512.0" mnemonicParsing="false" onAction="#rotateFigures" prefHeight="47.0" prefWidth="231.0" text="Поворот">
                <font>
                   <Font size="22.0" />
                </font>
             </Button>
-            <TextField fx:id="rotateValue" layoutX="19.0" layoutY="454.0" prefHeight="49.0" prefWidth="81.0" text="0">
+            <TextField fx:id="rotateValue" layoutX="14.0" layoutY="451.0" prefHeight="49.0" prefWidth="81.0" text="0">
                <font>
                   <Font size="26.0" />
                </font>
             </TextField>
-            <Label layoutX="14.0" layoutY="68.0" prefHeight="46.0" prefWidth="309.0" text="Центр изображения">
+            <Label layoutX="14.0" layoutY="14.0" prefHeight="46.0" prefWidth="258.0" text="Центр изображения">
                <font>
                   <Font size="22.0" />
                </font></Label>
-            <Button layoutX="19.0" layoutY="631.0" mnemonicParsing="false" onAction="#goBack" prefHeight="40.0" prefWidth="245.0" text="Шаг назад">
+            <Button layoutX="14.0" layoutY="631.0" mnemonicParsing="false" onAction="#goBack" prefHeight="47.0" prefWidth="231.0" text="Шаг назад">
                <font>
                   <Font size="22.0" />
                </font>
             </Button>
-            <Label layoutX="108.0" layoutY="456.0" prefHeight="46.0" prefWidth="179.0" text="Угол поворота">
+            <Label layoutX="98.0" layoutY="456.0" prefHeight="46.0" prefWidth="188.0" text="Угол поворота">
                <font>
                   <Font size="22.0" />
                </font>
             </Label>
-            <TextField fx:id="scaleValueY" layoutX="122.0" layoutY="310.0" prefHeight="46.0" prefWidth="81.0" promptText="Y">
+            <TextField fx:id="scaleValueY" layoutX="148.0" layoutY="310.0" prefHeight="51.0" prefWidth="98.0" promptText="Y">
                <font>
                   <Font size="24.0" />
                </font>
             </TextField>
+            <Label layoutX="14.0" layoutY="111.0" prefHeight="46.0" prefWidth="231.0" text="Смещение">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <Label layoutX="14.0" layoutY="261.0" prefHeight="46.0" prefWidth="231.0" text="Коэффициенты">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
          </children></AnchorPane>
     <AnchorPane minHeight="0.0" minWidth="0.0" nodeOrientation="LEFT_TO_RIGHT" onDragDetected="#drawPrint" prefHeight="398.0" prefWidth="345.0">
          <children>
-            <SplitPane dividerPositions="0.8241758241758241" layoutX="2.0" layoutY="2.0" orientation="VERTICAL" prefHeight="730.0" prefWidth="675.0">
+            <SplitPane dividerPositions="0.5729047072330654" layoutX="2.0" layoutY="2.0" prefHeight="730.0" prefWidth="1164.0">
               <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                      <children>
-                        <Canvas fx:id="aCanvasForCenter" height="603.0" layoutX="-1.0" layoutY="-3.0" width="673.0" />
-                        <Canvas fx:id="aCanvas" height="603.0" layoutY="-3.0" width="673.0" />
+                        <Canvas fx:id="aCanvasForCenter" height="731.0" layoutY="-3.0" width="663.0" />
+                        <Canvas fx:id="aCanvas" height="731.0" layoutY="-3.0" width="663.0" />
                      </children>
                   </AnchorPane>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="727.0" prefWidth="361.0">
                      <children>
-                        <TextArea fx:id="translationLogger" prefHeight="125.0" prefWidth="673.0">
+                        <TextArea fx:id="translationLogger" layoutX="1.0" prefHeight="725.0" prefWidth="478.0">
                            <font>
                               <Font size="22.0" />
                            </font>

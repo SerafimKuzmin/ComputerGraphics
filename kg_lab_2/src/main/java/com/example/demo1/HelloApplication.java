@@ -9,7 +9,7 @@ import java.io.IOException;
 
 public class HelloApplication extends Application {
 
-    private static final int WIDTH = 997;
+    private static final int WIDTH = 1437;
     private static final int HEIGHT = 732;
 
     @Override

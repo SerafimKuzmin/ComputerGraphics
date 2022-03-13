@@ -14,12 +14,12 @@ public class TranslationLogger
 
     public static void rotateLogger(TextArea aTextArea, double angle)
     {
-        aTextArea.setText(aTextArea.getText() + String.format("Фигура повернута на %.2f градуоов\n", angle));
+        aTextArea.setText(aTextArea.getText() + String.format("Фигура повернута на %.2f градусов\n", angle));
     }
 
     public static void scaleLogger(TextArea aTextArea, Point2D scale)
     {
-        aTextArea.setText(aTextArea.getText() + String.format("Фигура растянута с коэффицентами (%.2f, %.2f)\n",
+        aTextArea.setText(aTextArea.getText() + String.format("Фигура промасшт. с коэфф. (%.2f, %.2f)\n",
                                                               scale.getX(), scale.getY()));
     }
 
