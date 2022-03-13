@@ -1,6 +1,9 @@
 package com.example.demo1.Figure;
 
 
+import com.example.demo1.Action.Action;
+import com.example.demo1.Action.MoveAction;
+import com.example.demo1.Action.RotateAction;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 
@@ -39,43 +42,21 @@ public class Figure
         }
     }
 
-    public void move(double dx, double dy)
+    public void transform(Action action)
     {
         for (int i = 0; i < nPoints; ++i)
         {
             Point2D point = points.get(i);
-            Point2D newPoint = new Point2D(point.getX() + dx, point.getY() + dy);
-            points.set(i, newPoint);
+            points.set(i, action.make(point));
         }
     }
 
-    public void rotate(Point2D center, double angle)
+    public void transformBack(Action action)
     {
-        double cx = center.getX(), cy = center.getY();
-        double cos = Math.cos(Math.toRadians(angle));
-        double sin = Math.sin(Math.toRadians(angle));
-
         for (int i = 0; i < nPoints; ++i)
         {
-            double x = points.get(i).getX();
-            double y = points.get(i).getY();
-            double nx = cx + (x - cx) * cos - (y - cy) * sin;
-            double ny = cy + (x - cx) * sin + (y - cy) * cos;
-            points.set(i, new Point2D(nx, ny));
-        }
-    }
-
-    public void scale(Point2D center, double kx, double ky)
-    {
-        double cx = center.getX(), cy = center.getY();
-
-        for (int i = 0; i < nPoints; ++i)
-        {
-            double x = points.get(i).getX();
-            double y = points.get(i).getY();
-            double nx = (x - cx) * kx + cx;
-            double ny = (y - cy) * ky + cy;
-            points.set(i, new Point2D(nx, ny));
+            Point2D point = points.get(i);
+            points.set(i, action.makeBack(point));
         }
     }
 }

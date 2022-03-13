@@ -1,5 +1,9 @@
 package com.example.demo1;
 
+import com.example.demo1.Action.Action;
+import com.example.demo1.Action.MoveAction;
+import com.example.demo1.Action.RotateAction;
+import com.example.demo1.Action.ScaleAction;
 import com.example.demo1.Figure.Figure;
 import com.example.demo1.Figure.MyCircle;
 import com.example.demo1.Figure.MyTriangle;
@@ -12,13 +16,19 @@ import javafx.scene.control.TextField;
 import javafx.scene.transform.*;
 
 import java.util.ArrayList;
+import java.util.Stack;
 
 public class HelloController{
 
     private ArrayList <Figure> figures;
 
+    private Stack <Action> actions;
+
     @FXML
     Canvas aCanvas;
+
+    @FXML
+    private Canvas aCanvasForCenter;
 
     @FXML
     private TextField moveX;
@@ -42,17 +52,13 @@ public class HelloController{
     private TextField rotateValue;
 
     @FXML
-    private Canvas aCanvasForCenter;
-
-    @FXML
     private TextArea translationLogger;
-
-    //Point2D centerShift = new Point2D(0, 0);
 
 
     @FXML
     private void initialize()
     {
+        actions = new Stack<>();
         initPrint();
         drawPrint();
         TranslationLogger.launchTranslation(translationLogger);
@@ -154,10 +160,12 @@ public class HelloController{
 
             double dx = Double.parseDouble(moveX.getText());
             double dy = Double.parseDouble(moveY.getText());
+            Action action = new MoveAction(dx, dy);
+            actions.add(action);
 
             for (var figure : figures)
             {
-                figure.move(dx, dy);
+                figure.transform(action);
             }
             drawPrint();
 
@@ -189,10 +197,12 @@ public class HelloController{
             var center = getCenter();
             double kx = Double.parseDouble(scaleValueX.getText());
             double ky = Double.parseDouble(scaleValueY.getText());
+            Action action = new ScaleAction(center, kx, ky);
+            actions.add(action);
 
             for (var figure : figures)
             {
-                figure.scale(center, kx, ky);
+                figure.transform(action);
             }
             drawPrint();
 
@@ -222,10 +232,12 @@ public class HelloController{
 
             double angle = Double.parseDouble(rotateValue.getText());
             var center = getCenter();
+            Action action = new RotateAction(center, angle);
+            actions.add(action);
 
             for (var figure : figures)
             {
-                figure.rotate(center, angle);
+                figure.transform(action);
             }
             drawPrint();
 
@@ -245,23 +257,18 @@ public class HelloController{
     @FXML
     private void goBack()
     {
-        var curTransforms = aCanvas.getTransforms();
-        if (curTransforms.size() == 0)
+        if (actions.size() == 0)
         {
             showAlertWithMSG("Вы вернулись в исходное состояние, невозможно сделать шаг назад");
         }
         else
         {
-            var transforms = aCanvas.getTransforms();
+            Action action = actions.pop();
 
+            for (var figure : figures)
+                figure.transformBack(action);
+            drawPrint();
 
-            if (isTransformMatrix(transforms.get(transforms.size() - 1)))
-            {
-                //centerShift = centerShift.add(transforms.get(transforms.size() - 1).getTx(),
-                //        transforms.get(transforms.size() - 1).getTy());
-            }
-
-            transforms.remove(aCanvas.getTransforms().size() - 1);
             TranslationLogger.removeLastTranslation(translationLogger);
         }
     }
@@ -285,10 +292,4 @@ public class HelloController{
         return centerPoint;
     }
 
-    private boolean isTransformMatrix(Transform aTransform)
-    {
-        return (Math.abs(aTransform.getMxx() + aTransform.getMxy() + aTransform.getMxz() +
-                aTransform.getMyx() + aTransform.getMyy() + aTransform.getMyz() - 2) <= 0.1E-4 &&
-                (aTransform.getTx() != 0 || aTransform.getTy() != 0));
-    }
 }
