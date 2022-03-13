@@ -6,6 +6,7 @@ import com.example.demo1.Action.RotateAction;
 import com.example.demo1.Action.ScaleAction;
 import com.example.demo1.Figure.Figure;
 import com.example.demo1.Figure.MyCircle;
+import com.example.demo1.Figure.MyLine;
 import com.example.demo1.Figure.MyTriangle;
 import javafx.fxml.FXML;
 import javafx.geometry.Point2D;
@@ -69,17 +70,57 @@ public class HelloController{
     {
         figures = new ArrayList<>();
 
-        var circle = new MyCircle(200, 200, 10);
-        figures.add(circle);
-        var circle1 = new MyCircle(200, 200, 90);
-        figures.add(circle1);
-        var circle2 = new MyCircle(200, 200, 100);
-        figures.add(circle2);
+        // отрисовка двух главных окружностей
+        {
+            var circle = new MyCircle(200, 200, 10);
+            figures.add(circle);
+            var circle1 = new MyCircle(200, 200, 80);
+            figures.add(circle1);
+            var circle2 = new MyCircle(200, 200, 100);
+            figures.add(circle2);
+        }
 
-        var triangle = new MyTriangle(new Point2D(200, 200), new Point2D(100, 400), new Point2D(120, 400));
-        figures.add(triangle);
-        var triangle1 = new MyTriangle(new Point2D(200, 200), new Point2D(280, 400), new Point2D(300, 400));
-        figures.add(triangle1);
+        // отрисовка линий через 2 главные окрыжности
+        {
+            double d = 80 * Math.sin(Math.toRadians(45));
+            var line = new MyLine(new Point2D(200 - d, 200 - d), new Point2D(200 + d, 200 + d));
+            figures.add(line);
+            var line1 = new MyLine(new Point2D(200 + d, 200 - d), new Point2D(200 - d, 200 + d));
+            figures.add(line1);
+        }
+
+        // отрисовка 4-х маленьких окружностей
+        {
+            var circle3 = new MyCircle(200, 110, 10);
+            figures.add(circle3);
+            var circle4 = new MyCircle(200, 290, 10);
+            figures.add(circle4);
+            var circle5 = new MyCircle(110, 200, 10);
+            figures.add(circle5);
+            var circle6 = new MyCircle(290, 200, 10);
+            figures.add(circle6);
+
+            // отрисовка линий через маленькие окружности
+            {
+                double d = 10 * Math.sin(Math.toRadians(45));
+                figures.add(new MyLine(new Point2D(200 - d, 110 - d), new Point2D(200 + d, 110 + d)));
+                figures.add(new MyLine(new Point2D(200 - d, 110 + d), new Point2D(200 + d, 110 - d)));
+                figures.add(new MyLine(new Point2D(200 - d, 290 - d), new Point2D(200 + d, 290 + d)));
+                figures.add(new MyLine(new Point2D(200 - d, 290 + d), new Point2D(200 + d, 290 - d)));
+                figures.add(new MyLine(new Point2D(110 - d, 200 - d), new Point2D(110 + d, 200 + d)));
+                figures.add(new MyLine(new Point2D(110 - d, 200 + d), new Point2D(110 + d, 200 - d)));
+                figures.add(new MyLine(new Point2D(290 - d, 200 - d), new Point2D(290 + d, 200 + d)));
+                figures.add(new MyLine(new Point2D(290 - d, 200 + d), new Point2D(290 + d, 200 - d)));
+            }
+        }
+
+        // отрисовка двух треугольников
+        {
+            var triangle = new MyTriangle(new Point2D(200, 200), new Point2D(100, 400), new Point2D(140, 400));
+            figures.add(triangle);
+            var triangle1 = new MyTriangle(new Point2D(200, 200), new Point2D(260, 400), new Point2D(300, 400));
+            figures.add(triangle1);
+        }
     }
 
     @FXML
@@ -118,17 +159,6 @@ public class HelloController{
         final double pointHeight = 5;
         final double pointWidth = 5;
         var g = aCanvasForCenter.getGraphicsContext2D();
-        g.fillOval(x - pointWidth/2, y - pointHeight/2, pointWidth, pointHeight);
-        g.fillText(Double.valueOf(x).toString() + " " + Double.valueOf(y).toString(), x - 40, y - pointWidth*3);
-        g.stroke();
-    }
-
-
-    private void drawPointWithCoord(double x, double y, Canvas aCanvas)
-    {
-        final double pointHeight = 5;
-        final double pointWidth = 5;
-        var g = aCanvas.getGraphicsContext2D();
         g.fillOval(x - pointWidth/2, y - pointHeight/2, pointWidth, pointHeight);
         g.fillText(Double.valueOf(x).toString() + " " + Double.valueOf(y).toString(), x - 40, y - pointWidth*3);
         g.stroke();
