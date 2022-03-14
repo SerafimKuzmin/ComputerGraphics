@@ -9,9 +9,15 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
+<<<<<<< HEAD
 <SplitPane dividerPositions="0.19474785033697417" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="732.0" prefWidth="1437.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.HelloController">
   <items>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="729.0" prefWidth="283.0" style="-fx-background-color: gray;">
+=======
+<SplitPane dividerPositions="0.3185929648241206" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.HelloController">
+  <items>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="722.0" prefWidth="314.0">
+>>>>>>> master
          <children>
             <Button id="leftButton" layoutX="14.0" layoutY="214.0" mnemonicParsing="false" onAction="#moveFigures" prefHeight="47.0" prefWidth="231.0" text="Перенос">
                <font>
@@ -21,7 +27,11 @@
                <font>
                   <Font size="22.0" />
                </font></Button>
+<<<<<<< HEAD
             <TextField fx:id="centerY" layoutX="148.0" layoutY="60.0" onAction="#changedCenter" onDragExited="#changedCenter" onDragOver="#changedCenter" onInputMethodTextChanged="#changedCenter" onMouseDragExited="#changedCenter" onMouseExited="#changedCenter" prefHeight="51.0" prefWidth="98.0" promptText="Y" text="200">
+=======
+            <TextField fx:id="centerY" layoutX="157.0" layoutY="14.0" onAction="#changedCenter" onDragExited="#changedCenter" onDragOver="#changedCenter" onInputMethodTextChanged="#changedCenter" onMouseDragExited="#changedCenter" onMouseExited="#changedCenter" prefHeight="46.0" prefWidth="111.0" promptText="Y" text="0">
+>>>>>>> master
                <font>
                   <Font size="24.0" />
                </font></TextField>
@@ -37,7 +47,11 @@
                <font>
                   <Font size="24.0" />
                </font></TextField>
+<<<<<<< HEAD
             <TextField fx:id="centerX" layoutX="14.0" layoutY="60.0" onAction="#changedCenter" onDragExited="#changedCenter" onDragOver="#changedCenter" onInputMethodTextChanged="#changedCenter" onMouseDragExited="#changedCenter" onMouseExited="#changedCenter" prefHeight="51.0" prefWidth="98.0" promptText="X" text="200">
+=======
+            <TextField fx:id="centerX" layoutX="14.0" layoutY="14.0" onAction="#changedCenter" onDragExited="#changedCenter" onDragOver="#changedCenter" onInputMethodTextChanged="#changedCenter" onMouseDragExited="#changedCenter" onMouseExited="#changedCenter" prefHeight="46.0" prefWidth="111.0" promptText="X" text="0">
+>>>>>>> master
                <font>
                   <Font size="24.0" />
                </font></TextField>
@@ -83,17 +97,30 @@
          </children></AnchorPane>
     <AnchorPane minHeight="0.0" minWidth="0.0" nodeOrientation="LEFT_TO_RIGHT" onDragDetected="#drawPrint" prefHeight="398.0" prefWidth="345.0">
          <children>
+<<<<<<< HEAD
             <SplitPane dividerPositions="0.5729047072330654" layoutX="2.0" layoutY="2.0" prefHeight="730.0" prefWidth="1164.0">
               <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                      <children>
                         <Canvas fx:id="aCanvasForCenter" height="731.0" layoutY="-3.0" width="663.0" />
                         <Canvas fx:id="aCanvas" height="731.0" layoutY="-3.0" width="663.0" />
+=======
+            <SplitPane dividerPositions="0.8241758241758241" layoutX="2.0" layoutY="2.0" orientation="VERTICAL" prefHeight="1000.0" prefWidth="1000.0">
+              <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                     <children>
+                        <Canvas fx:id="aCanvasForCenter" height="800.0" layoutX="-1.0" layoutY="-3.0" width="1000.0" />
+                        <Canvas fx:id="aCanvas" height="800.0" layoutX="-1.0" layoutY="-3.0" width="1000.0" />
+>>>>>>> master
                      </children>
                   </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="727.0" prefWidth="361.0">
                      <children>
+<<<<<<< HEAD
                         <TextArea fx:id="translationLogger" layoutX="1.0" prefHeight="725.0" prefWidth="478.0">
+=======
+                        <TextArea fx:id="translationLogger" prefHeight="200.0" prefWidth="1000.0">
+>>>>>>> master
                            <font>
                               <Font size="22.0" />
                            </font>

@@ -5,7 +5,13 @@ import com.example.demo1.Figure.*;
 import javafx.fxml.FXML;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.control.*;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.ValueAxis;
+import javafx.scene.control.Alert;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.transform.*;
 
 import java.util.ArrayList;
 import java.util.Stack;
@@ -52,9 +58,18 @@ public class HelloController{
     {
         actions = new Stack<>();
         initPrint();
+        moveToCenter();
+
         drawPrint();
         TranslationLogger.launchTranslation(translationLogger);
         drawCenter();
+    }
+
+    private void drawAxises()
+    {
+        NumberAxis xAxis = new NumberAxis(-500, 500, 100);
+        NumberAxis yAxis = new NumberAxis(-500, 500, 100);
+        
     }
 
     private void initPrint()
@@ -109,6 +124,12 @@ public class HelloController{
         }
     }
 
+    private void moveToCenter()
+    {
+        for (var figure : figures)
+            figure.moveToCenter(aCanvas);
+    }
+
     @FXML
     private void changedCenter()
     {
@@ -123,6 +144,10 @@ public class HelloController{
         catch (NullPointerException e)
         {
             showAlertWithMSG("Некорректно задан центр");
+        }
+        catch (NumberFormatException e)
+        {
+            showAlertWithMSG("Некорректный ввод числа, попробуйте еще раз!");
         }
     }
 
@@ -144,9 +169,11 @@ public class HelloController{
     {
         final double pointHeight = 5;
         final double pointWidth = 5;
+        final double dx = aCanvas.getWidth() / 2;
+        final double dy = aCanvas.getHeight() / 2;
         var g = aCanvasForCenter.getGraphicsContext2D();
-        g.fillOval(x - pointWidth/2, y - pointHeight/2, pointWidth, pointHeight);
-        g.fillText(Double.valueOf(x).toString() + " " + Double.valueOf(y).toString(), x - 40, y - pointWidth*3);
+        g.fillOval(dx + x - pointWidth/2, dy - y + pointHeight/2, pointWidth, pointHeight);
+        g.fillText(Double.valueOf(x).toString() + " " + Double.valueOf(y).toString(), dx + x - 40, dy - y + pointWidth*3);
         g.stroke();
     }
 
@@ -176,7 +203,7 @@ public class HelloController{
 
             double dx = Double.parseDouble(moveX.getText());
             double dy = Double.parseDouble(moveY.getText());
-            Action action = new MoveAction(dx, dy);
+            Action action = new MoveAction(dx, -dy);
             actions.add(action);
 
             for (var figure : figures)
@@ -210,9 +237,13 @@ public class HelloController{
             {
                 throw new NullPointerException();
             }
+
             var center = getCenter();
             double kx = Double.parseDouble(scaleValueX.getText());
             double ky = Double.parseDouble(scaleValueY.getText());
+            if (kx == 0 || ky == 0)
+                throw new NullPointerException();
+
             Action action = new ScaleAction(center, kx, ky);
             actions.add(action);
 
@@ -302,7 +333,11 @@ public class HelloController{
     {
         var centerPoint = new Point2D(Double.parseDouble(centerX.getText()),
                                 Double.parseDouble(centerY.getText()));
-        return centerPoint;
+        final double dx = aCanvas.getWidth() / 2;
+        final double dy = aCanvas.getHeight() / 2;
+        MoveAction move = new MoveAction(dx, dy);
+
+        return move.make(centerPoint);
     }
 
 }
