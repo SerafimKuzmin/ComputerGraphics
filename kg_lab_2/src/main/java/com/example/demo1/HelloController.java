@@ -11,13 +11,10 @@ import com.example.demo1.Figure.MyTriangle;
 import javafx.fxml.FXML;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
-import javafx.scene.transform.*;
 
 import java.util.ArrayList;
 import java.util.Stack;
@@ -86,7 +83,6 @@ public class HelloController{
         var yTr = new MyTriangle(new Point2D(0, height / 2), new Point2D(5, height / 2 - 15), new Point2D(-5, height / 2 - 15));
         axises.add(xTr);
         axises.add(yTr);
-
         for (var figure : axises)
             figure.moveToCenter(aCanvasForCenter);
     }
@@ -95,6 +91,7 @@ public class HelloController{
     {
         drawCenter();
         var gc = aCanvasForCenter.getGraphicsContext2D();
+
         makeAxises();
         for (var figure : axises)
             figure.draw(gc);
@@ -207,8 +204,8 @@ public class HelloController{
     {
         final double pointHeight = 5;
         final double pointWidth = 5;
-        final double dx = aCanvas.getWidth() / 2;
-        final double dy = aCanvas.getHeight() / 2;
+        final double dx = aCanvasForCenter.getWidth() / 2;
+        final double dy = aCanvasForCenter.getHeight() / 2;
         var g = aCanvasForCenter.getGraphicsContext2D();
         g.fillOval(dx + x - pointWidth/2, dy - y - pointHeight/2, pointWidth, pointHeight);
         g.fillText(Double.valueOf(x).toString() + " " + Double.valueOf(y).toString(), dx + x - 40, dy - y + pointWidth*3);
@@ -219,8 +216,8 @@ public class HelloController{
     {
         final double pointHeight = 5;
         final double pointWidth = 5;
-        final double dx = aCanvas.getWidth() / 2;
-        final double dy = aCanvas.getHeight() / 2;
+        final double dx = aCanvasForCenter.getWidth() / 2;
+        final double dy = aCanvasForCenter.getHeight() / 2;
         var g = aCanvasForCenter.getGraphicsContext2D();
         g.fillOval(dx + x - pointWidth/2, dy - y - pointHeight/2, pointWidth, pointHeight);
         g.fillText(Double.valueOf(value).toString(), dx + x - 40, dy - y + pointWidth*3);
@@ -231,6 +228,7 @@ public class HelloController{
     {
         var gc = aCanvas.getGraphicsContext2D();
         gc.clearRect(0, 0, aCanvas.getWidth(), aCanvas.getHeight());
+        gc.setStroke(Color.CHOCOLATE);
         gc.beginPath();
 
         for (var figure : figures)
@@ -292,7 +290,7 @@ public class HelloController{
             double kx = Double.parseDouble(scaleValueX.getText());
             double ky = Double.parseDouble(scaleValueY.getText());
             if (kx == 0 || ky == 0)
-                throw new NullPointerException();
+                throw new NumberFormatException();
 
             Action action = new ScaleAction(center, kx, ky);
             actions.add(action);
@@ -390,5 +388,4 @@ public class HelloController{
 
         return move.make(scale.make(centerPoint));
     }
-
 }

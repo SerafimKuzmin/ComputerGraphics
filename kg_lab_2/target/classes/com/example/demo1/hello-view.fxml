@@ -11,7 +11,7 @@
 
 <SplitPane dividerPositions="0.3185929648241206" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.HelloController">
   <items>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="722.0" prefWidth="314.0">
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="722.0" prefWidth="314.0" style="-fx-background-color: lightsteelblue;">
          <children>
             <Button id="leftButton" layoutX="14.0" layoutY="227.0" mnemonicParsing="false" onAction="#moveFigures" prefHeight="39.0" prefWidth="148.0" text="Перенос">
                <font>
