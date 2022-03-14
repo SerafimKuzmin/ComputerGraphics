@@ -31,6 +31,7 @@ public class MyCircle extends Figure
             double y = cy + r * Math.sin(angle);
             addPoint(x, y);
         }
+        addPoint(cx + r, cy);
     }
 
 

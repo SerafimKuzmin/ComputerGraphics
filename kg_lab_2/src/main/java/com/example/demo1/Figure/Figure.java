@@ -4,7 +4,9 @@ package com.example.demo1.Figure;
 import com.example.demo1.Action.Action;
 import com.example.demo1.Action.MoveAction;
 import com.example.demo1.Action.RotateAction;
+import com.example.demo1.Action.ScaleAction;
 import javafx.geometry.Point2D;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 
 import java.util.ArrayList;
@@ -57,6 +59,19 @@ public class Figure
         {
             Point2D point = points.get(i);
             points.set(i, action.makeBack(point));
+        }
+    }
+
+    public void moveToCenter(Canvas aCanvas)
+    {
+        double biasX = aCanvas.getWidth() / 2;
+        double biasY = aCanvas.getHeight() / 2;
+        ScaleAction flip = new ScaleAction(new Point2D(0, 0), 1, -1);
+        MoveAction move = new MoveAction(biasX, biasY);
+        for (int i = 0; i < nPoints; ++i)
+        {
+            Point2D point = points.get(i);
+            points.set(i, move.make(flip.make(point)));
         }
     }
 }

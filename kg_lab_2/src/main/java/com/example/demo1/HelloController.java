@@ -11,6 +11,9 @@ import com.example.demo1.Figure.MyTriangle;
 import javafx.fxml.FXML;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.ValueAxis;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -61,9 +64,18 @@ public class HelloController{
     {
         actions = new Stack<>();
         initPrint();
+        moveToCenter();
+
         drawPrint();
         TranslationLogger.launchTranslation(translationLogger);
         drawCenter();
+    }
+
+    private void drawAxises()
+    {
+        NumberAxis xAxis = new NumberAxis(-500, 500, 100);
+        NumberAxis yAxis = new NumberAxis(-500, 500, 100);
+        
     }
 
     private void initPrint()
@@ -72,55 +84,58 @@ public class HelloController{
 
         // отрисовка двух главных окружностей
         {
-            var circle = new MyCircle(200, 200, 10);
-            figures.add(circle);
-            var circle1 = new MyCircle(200, 200, 80);
-            figures.add(circle1);
-            var circle2 = new MyCircle(200, 200, 100);
-            figures.add(circle2);
+            figures.add(new MyCircle(0, 0, 10));
+            figures.add(new MyCircle(0, 0, 80));
+            figures.add(new MyCircle(0, 0, 100));
         }
 
         // отрисовка линий через 2 главные окрыжности
         {
             double d = 80 * Math.sin(Math.toRadians(45));
-            var line = new MyLine(new Point2D(200 - d, 200 - d), new Point2D(200 + d, 200 + d));
+            var line = new MyLine(new Point2D(-d, -d), new Point2D(d, d));
             figures.add(line);
-            var line1 = new MyLine(new Point2D(200 + d, 200 - d), new Point2D(200 - d, 200 + d));
+            var line1 = new MyLine(new Point2D(d, -d), new Point2D(-d, d));
             figures.add(line1);
         }
 
         // отрисовка 4-х маленьких окружностей
         {
-            var circle3 = new MyCircle(200, 110, 10);
+            var circle3 = new MyCircle(0, -90, 10);
             figures.add(circle3);
-            var circle4 = new MyCircle(200, 290, 10);
+            var circle4 = new MyCircle(0, 90, 10);
             figures.add(circle4);
-            var circle5 = new MyCircle(110, 200, 10);
+            var circle5 = new MyCircle(-90, 0, 10);
             figures.add(circle5);
-            var circle6 = new MyCircle(290, 200, 10);
+            var circle6 = new MyCircle(90, 0, 10);
             figures.add(circle6);
 
             // отрисовка линий через маленькие окружности
             {
                 double d = 10 * Math.sin(Math.toRadians(45));
-                figures.add(new MyLine(new Point2D(200 - d, 110 - d), new Point2D(200 + d, 110 + d)));
-                figures.add(new MyLine(new Point2D(200 - d, 110 + d), new Point2D(200 + d, 110 - d)));
-                figures.add(new MyLine(new Point2D(200 - d, 290 - d), new Point2D(200 + d, 290 + d)));
-                figures.add(new MyLine(new Point2D(200 - d, 290 + d), new Point2D(200 + d, 290 - d)));
-                figures.add(new MyLine(new Point2D(110 - d, 200 - d), new Point2D(110 + d, 200 + d)));
-                figures.add(new MyLine(new Point2D(110 - d, 200 + d), new Point2D(110 + d, 200 - d)));
-                figures.add(new MyLine(new Point2D(290 - d, 200 - d), new Point2D(290 + d, 200 + d)));
-                figures.add(new MyLine(new Point2D(290 - d, 200 + d), new Point2D(290 + d, 200 - d)));
+                figures.add(new MyLine(new Point2D(-d, -90 - d), new Point2D(d, -90 + d)));
+                figures.add(new MyLine(new Point2D(-d, -90 + d), new Point2D(d, -90 - d)));
+                figures.add(new MyLine(new Point2D(- d, 90 - d), new Point2D(d, 90 + d)));
+                figures.add(new MyLine(new Point2D(- d, 90 + d), new Point2D(d, 90 - d)));
+                figures.add(new MyLine(new Point2D(-90 - d, - d), new Point2D(-90 + d, d)));
+                figures.add(new MyLine(new Point2D(-90 - d, d), new Point2D(-90 + d, -d)));
+                figures.add(new MyLine(new Point2D(90 - d, - d), new Point2D(90 + d, d)));
+                figures.add(new MyLine(new Point2D(90 - d, d), new Point2D(90 + d, -d)));
             }
         }
 
         // отрисовка двух треугольников
         {
-            var triangle = new MyTriangle(new Point2D(200, 200), new Point2D(100, 400), new Point2D(140, 400));
+            var triangle = new MyTriangle(new Point2D(0, 0), new Point2D(-100, -200), new Point2D(-60, -200));
             figures.add(triangle);
-            var triangle1 = new MyTriangle(new Point2D(200, 200), new Point2D(260, 400), new Point2D(300, 400));
+            var triangle1 = new MyTriangle(new Point2D(0, 0), new Point2D(60, -200), new Point2D(100, -200));
             figures.add(triangle1);
         }
+    }
+
+    private void moveToCenter()
+    {
+        for (var figure : figures)
+            figure.moveToCenter(aCanvas);
     }
 
     @FXML
@@ -162,9 +177,11 @@ public class HelloController{
     {
         final double pointHeight = 5;
         final double pointWidth = 5;
+        final double dx = aCanvas.getWidth() / 2;
+        final double dy = aCanvas.getHeight() / 2;
         var g = aCanvasForCenter.getGraphicsContext2D();
-        g.fillOval(x - pointWidth/2, y - pointHeight/2, pointWidth, pointHeight);
-        g.fillText(Double.valueOf(x).toString() + " " + Double.valueOf(y).toString(), x - 40, y - pointWidth*3);
+        g.fillOval(dx + x - pointWidth/2, dy - y + pointHeight/2, pointWidth, pointHeight);
+        g.fillText(Double.valueOf(x).toString() + " " + Double.valueOf(y).toString(), dx + x - 40, dy - y + pointWidth*3);
         g.stroke();
     }
 
@@ -194,7 +211,7 @@ public class HelloController{
 
             double dx = Double.parseDouble(moveX.getText());
             double dy = Double.parseDouble(moveY.getText());
-            Action action = new MoveAction(dx, dy);
+            Action action = new MoveAction(dx, -dy);
             actions.add(action);
 
             for (var figure : figures)
@@ -228,9 +245,13 @@ public class HelloController{
             {
                 throw new NullPointerException();
             }
+
             var center = getCenter();
             double kx = Double.parseDouble(scaleValueX.getText());
             double ky = Double.parseDouble(scaleValueY.getText());
+            if (kx == 0 || ky == 0)
+                throw new NullPointerException();
+
             Action action = new ScaleAction(center, kx, ky);
             actions.add(action);
 
@@ -320,10 +341,11 @@ public class HelloController{
     {
         var centerPoint = new Point2D(Double.parseDouble(centerX.getText()),
                                 Double.parseDouble(centerY.getText()));
+        final double dx = aCanvas.getWidth() / 2;
+        final double dy = aCanvas.getHeight() / 2;
+        MoveAction move = new MoveAction(dx, dy);
 
-        //centerPoint = centerPoint.add(centerShift);
-
-        return centerPoint;
+        return move.make(centerPoint);
     }
 
 }
