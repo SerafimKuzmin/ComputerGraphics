@@ -5,14 +5,8 @@ import com.example.demo1.Figure.*;
 import javafx.fxml.FXML;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.ValueAxis;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.paint.Color;
-import javafx.scene.transform.*;
 
 import java.util.ArrayList;
 import java.util.Stack;
@@ -285,7 +279,7 @@ public class HelloController{
             double kx = Double.parseDouble(scaleValueX.getText());
             double ky = Double.parseDouble(scaleValueY.getText());
             if (kx == 0 || ky == 0)
-                throw new NullPointerException();
+                throw new NumberFormatException();
 
             Action action = new ScaleAction(center, kx, ky);
             actions.add(action);
