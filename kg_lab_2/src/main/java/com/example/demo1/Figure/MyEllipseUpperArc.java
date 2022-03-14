@@ -31,10 +31,38 @@ public class MyEllipseUpperArc extends Figure
         double b = heigth / 2;
         double xc = position.getX() + a;
         double yc = position.getY() + b;
-        for (double x = xc - a; x <= xc + a; x++)
+        var r = radius(0, a, b);
+        for (double angle = Math.PI; angle <= Math.PI * 2; angle += 1 / r)
         {
-            double y = yc - (Math.sqrt(b * b * (1 - Math.pow(x - xc, 2) / (a * a))) - b) - b;
+            r = radius(angle, a, b);
+            double x = xc + a * Math.cos(angle);
+            double y = yc + b * Math.sin(angle);
             addPoint(x, y);
         }
+        addPoint(xc + a, yc);
+    }
+    private double dx(double t, double a)
+    {
+        return -a * Math.sin(t);
+    }
+
+    private double dy(double t, double b)
+    {
+        return b * Math.cos(t);
+    }
+
+    private double ddx(double t, double a)
+    {
+        return -a * Math.cos(t);
+    }
+
+    private double ddy(double t, double b)
+    {
+        return -b * Math.sin(t);
+    }
+
+    private double radius(double t, double a, double b)
+    {
+        return Math.pow(dx(t, a) * dx(t, a) + dy(t, b) * dy(t, b), 1.5)/Math.abs(dx(t, a) * ddy(t, b) - ddx(t, a) * dy(t, b));
     }
 }

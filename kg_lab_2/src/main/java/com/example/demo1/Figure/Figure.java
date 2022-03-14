@@ -71,7 +71,7 @@ public class Figure
         for (int i = 0; i < nPoints; ++i)
         {
             Point2D point = points.get(i);
-            points.set(i, move.make(flip.make(point)));
+            points.set(i, move.make(point));
         }
     }
 }
