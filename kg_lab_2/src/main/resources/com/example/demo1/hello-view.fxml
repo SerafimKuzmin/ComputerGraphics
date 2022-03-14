@@ -9,9 +9,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<SplitPane dividerPositions="0.3185929648241206" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="732.0" prefWidth="997.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.HelloController">
+<SplitPane dividerPositions="0.3185929648241206" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo1.HelloController">
   <items>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="673.0" prefWidth="367.0">
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="722.0" prefWidth="314.0">
          <children>
             <Button id="leftButton" layoutX="14.0" layoutY="227.0" mnemonicParsing="false" onAction="#moveFigures" prefHeight="39.0" prefWidth="148.0" text="Перенос">
                <font>
@@ -78,7 +78,7 @@
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                      <children>
                         <Canvas fx:id="aCanvasForCenter" height="603.0" layoutX="-1.0" layoutY="-3.0" width="673.0" />
-                        <Canvas fx:id="aCanvas" height="603.0" layoutY="-3.0" width="673.0" />
+                        <Canvas fx:id="aCanvas" height="603.0" layoutX="-1.0" layoutY="-3.0" width="675.0" />
                      </children>
                   </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">

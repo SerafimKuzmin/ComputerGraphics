@@ -25,15 +25,10 @@ public class MyCircle extends Figure
     private void fill()
     {
         double cx = center.getX(), cy = center.getY();
-        for (double x = cx - r; x <= cx + r; x++)
+        for (double angle = 0; angle <= 360; angle += 1 / r)
         {
-            double y = Math.sqrt((r * r) - ((x - cx) * (x - cx))) + cy;
-            addPoint(x, y);
-        }
-
-        for (double x = cx + r; x >= cx - r; x--)
-        {
-            double y = -Math.sqrt((r * r) - ((x - cx) * (x - cx))) + cy;
+            double x = cx + r * Math.cos(Math.toRadians(angle));
+            double y = cy + r * Math.sin(Math.toRadians(angle));
             addPoint(x, y);
         }
     }
