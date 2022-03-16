@@ -15,6 +15,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 
 import java.util.ArrayList;
 import java.util.Stack;
@@ -169,8 +170,8 @@ public class HelloController{
     {
         try
         {
-            double currentCenterX = Double.parseDouble(centerX.getText());
-            double currentCenterY = Double.parseDouble(centerY.getText());
+            int currentCenterX = Integer.parseInt(centerX.getText());
+            int currentCenterY = Integer.parseInt(centerY.getText());
             var gc = aCanvasForCenter.getGraphicsContext2D();
             gc.clearRect(0, 0, aCanvasForCenter.getWidth(), aCanvasForCenter.getHeight());
             drawAxises();
@@ -208,7 +209,8 @@ public class HelloController{
         final double dy = aCanvasForCenter.getHeight() / 2;
         var g = aCanvasForCenter.getGraphicsContext2D();
         g.fillOval(dx + x - pointWidth/2, dy - y - pointHeight/2, pointWidth, pointHeight);
-        g.fillText(Double.valueOf(x).toString() + " " + Double.valueOf(y).toString(), dx + x - 40, dy - y + pointWidth*3);
+        g.setFont(new Font("qwerty", 20));
+        g.fillText(Integer.valueOf((int)x).toString() + " " + Integer.valueOf((int)y).toString(), dx + x - 40, dy - y + pointWidth*3);
         g.stroke();
     }
 
@@ -220,7 +222,8 @@ public class HelloController{
         final double dy = aCanvasForCenter.getHeight() / 2;
         var g = aCanvasForCenter.getGraphicsContext2D();
         g.fillOval(dx + x - pointWidth/2, dy - y - pointHeight/2, pointWidth, pointHeight);
-        g.fillText(Double.valueOf(value).toString(), dx + x - 40, dy - y + pointWidth*3);
+        g.setFont(new Font("qwerty", 20));
+        g.fillText(Integer.valueOf((int)value).toString(), dx + x - 40, dy - y + pointWidth*3);
         g.stroke();
     }
 
@@ -249,8 +252,8 @@ public class HelloController{
                 throw new NullPointerException();
             }
 
-            double dx = Double.parseDouble(moveX.getText());
-            double dy = Double.parseDouble(moveY.getText());
+            int dx = Integer.parseInt(moveX.getText());
+            int dy = Integer.parseInt(moveY.getText());
             Action action = new MoveAction(dx, -dy);
             actions.add(action);
 
